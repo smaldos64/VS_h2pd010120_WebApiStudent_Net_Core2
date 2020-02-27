@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\CourseController.cs" />
+    <Compile Remove="Controllers\TestourseController.cs" />
+    <Compile Remove="Tools\ProjectConst.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ConstDeclarations\" />
+    <Folder Include="Tools\" />
   </ItemGroup>
 
 </Project>

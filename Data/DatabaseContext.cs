@@ -16,5 +16,7 @@ namespace WebApiStudent_Net_Core2.Data
         }
 
         public DbSet<Course> Courses { get; set; }
+        public virtual DbSet<LogData> LogDatas { get; set; }
+        public virtual DbSet<UserInfo> UserInfos { get; set; }
     }
 }

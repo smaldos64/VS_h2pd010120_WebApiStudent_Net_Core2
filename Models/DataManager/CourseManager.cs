@@ -14,37 +14,37 @@ namespace WebApiStudent_Net_Core2.Models.DataManager
 
         public CourseManager(DatabaseContext context)
         {
-            _databaseContext = context;
+            this._databaseContext = context;
         }
 
         public IEnumerable<Course> GetAll()
         {
-            return _databaseContext.Courses.ToList();
+            return (this._databaseContext.Courses.ToList());
         }
 
         public Course Get(long id)
         {
-            return _databaseContext.Courses
-                  .FirstOrDefault(c => c.CourseID == id);
+            return (this._databaseContext.Courses
+                  .FirstOrDefault(c => c.CourseID == id));
         }
 
         public void Add(Course entity)
         {
-            _databaseContext.Courses.Add(entity);
-            _databaseContext.SaveChanges();
+            this._databaseContext.Courses.Add(entity);
+            this._databaseContext.SaveChanges();
         }
 
         public void Update(Course course, Course entity)
         {
             course.CourseName = entity.CourseName;
 
-            _databaseContext.SaveChanges();
+            this._databaseContext.SaveChanges();
         }
 
         public void Delete(Course course)
         {
-            _databaseContext.Courses.Remove(course);
-            _databaseContext.SaveChanges();
+            this._databaseContext.Courses.Remove(course);
+            this._databaseContext.SaveChanges();
         }
     }
 }
