@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\CourseController.cs" />
+    <Compile Remove="Controllers\LogDataController.cs" />
     <Compile Remove="Controllers\TestourseController.cs" />
+    <Compile Remove="Controllers\UserInfoController.cs" />
+    <Compile Remove="Interfaces\IDataRepositoryUserInfo.cs" />
     <Compile Remove="Tools\ProjectConst.cs" />
   </ItemGroup>
 

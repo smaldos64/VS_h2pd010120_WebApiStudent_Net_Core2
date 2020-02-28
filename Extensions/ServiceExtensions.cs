@@ -6,7 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using WebApiStudent_Net_Core2.Data;
+using WebApiStudent_Net_Core2.Interfaces;
+using WebApiStudent_Net_Core2.Models.DataManager;
 
 namespace WebApiStudent_Net_Core2.Extensions
 {
@@ -35,6 +38,11 @@ namespace WebApiStudent_Net_Core2.Extensions
         {
             var connectionString = config["sqlconnection:connectionString"];
             services.AddDbContext<DatabaseContext>(o => o.UseSqlServer(connectionString));
+        }
+
+        public static void ConfigureRepositoryWrapper(this IServiceCollection services)
+        {
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
     }
 }

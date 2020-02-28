@@ -44,6 +44,8 @@ namespace WebApiStudent_Net_Core2
             services.AddScoped<IDataRepository<LogData>, LogDataManager>();
             services.AddScoped<IDataRepository<UserInfo>, UserInfoManager>();
 
+            services.ConfigureRepositoryWrapper();
+
             services.AddControllers();
         }
 

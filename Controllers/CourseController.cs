@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using WebApiStudent_Net_Core2.Interfaces;
 using WebApiStudent_Net_Core2.Models;
+using WebApiStudent_Net_Core2.ConstDeclarations;
 
 namespace WebApiStudent_Net_Core2.Controllers
 {
@@ -15,6 +16,7 @@ namespace WebApiStudent_Net_Core2.Controllers
     public class CourseController : ControllerBase
     {
         private readonly IDataRepository<Course> _dataRepository;
+        private readonly IDataRepository<UserInfo> _dataRepositoryUser;
 
         public CourseController(IDataRepository<Course> dataRepository)
         {
@@ -78,7 +80,7 @@ namespace WebApiStudent_Net_Core2.Controllers
         /// </returns>
         // POST: api/Course
         [HttpPost]
-        public IActionResult Post([FromBody] Course Course_Object)
+        public IActionResult Post([FromBody] Course Course_Object, string UserName, string Password)
         {
             if (null == Course_Object)
             {
@@ -125,8 +127,7 @@ namespace WebApiStudent_Net_Core2.Controllers
             }
 
             this._dataRepository.Update(Course_Object_ToUpdate, Course_Object);
-            //return NoContent();
-            return Ok(1);
+            return Ok(Const.UpdateOperationOk);
         }
 
         /// <summary>
@@ -154,8 +155,7 @@ namespace WebApiStudent_Net_Core2.Controllers
             }
 
             this._dataRepository.Delete(Course_Object);
-            //return NoContent();
-            return Ok(3);
+            return Ok(Const.DeleteOperationOk);
         }
     }
 }
