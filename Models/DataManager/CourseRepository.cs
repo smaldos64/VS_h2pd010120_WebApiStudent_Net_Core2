@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using WebApiStudent_Net_Core2.Interfaces;
 using WebApiStudent_Net_Core2.Data;
+using WebApiStudent_Net_Core2.Models.DataManager.Extensions;
 
 namespace WebApiStudent_Net_Core2.Models.DataManager
 {
@@ -25,9 +26,10 @@ namespace WebApiStudent_Net_Core2.Models.DataManager
                 //Course_Object = FindByCondition(c => c.CourseID.Equals(id))
                 //.DefaultIfEmpty(new Course())
                 //.FirstOrDefault();
-                Course_Object = FindByCondition(course => course.CourseID == id)
+                Course_Object = FindByCondition(c => c.CourseID == id)
                 .DefaultIfEmpty(new Course())
                 .FirstOrDefault();
+                // (LTPE) Hmm ? virker ikke med den første syntaks
             }
             catch (Exception error)
             {
@@ -35,6 +37,12 @@ namespace WebApiStudent_Net_Core2.Models.DataManager
             }
 
             return (Course_Object);
-            }
+        }
+
+        public void UpdateCourse(Course dbCourse, Course Course_Object)
+        {
+           dbCourse.Map(Course_Object);
+           this.Update(dbCourse);
+        }
     }
 }

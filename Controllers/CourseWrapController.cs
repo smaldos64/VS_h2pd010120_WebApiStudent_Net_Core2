@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 using WebApiStudent_Net_Core2.Interfaces;
 using WebApiStudent_Net_Core2.Models;
+using WebApiStudent_Net_Core2.ConstDeclarations;
+using WebApiStudent_Net_Core2.Models.DataManager.Extensions;
 
 namespace WebApiStudent_Net_Core2.Controllers
 {
@@ -35,7 +37,7 @@ namespace WebApiStudent_Net_Core2.Controllers
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(int id)
         {
-            var Course_Object = this._repoWrapper.CourseRepositoryWrapper.GetCourseByCourseID(id);
+            Course Course_Object = this._repoWrapper.CourseRepositoryWrapper.GetCourseByCourseID(id);
            
             if (null == Course_Object)
             {
@@ -47,20 +49,64 @@ namespace WebApiStudent_Net_Core2.Controllers
 
         // POST: api/CourseWrap
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] Course Course_Object, string UserName, string Password)
         {
+            if (null == Course_Object)
+            {
+                return BadRequest("Course is null.");
+            }
+
+            this._repoWrapper.CourseRepositoryWrapper.Create(Course_Object);
+            
+            return Ok(Course_Object.CourseID);
         }
 
         // PUT: api/CourseWrap/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(long id, [FromBody] Course Course_Object, string UserName, string Password)
         {
+            if (null == Course_Object)
+            {
+                return BadRequest("Course is null.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid model object");
+            }
+
+            var dbCourse = this._repoWrapper.CourseRepositoryWrapper.GetCourseByCourseID(id);
+
+            if (dbCourse.IsEmptyObjectGeneric())
+            {
+                return Ok(Const.ObjectNotFound);
+            }
+
+            this._repoWrapper.CourseRepositoryWrapper.UpdateCourse(dbCourse, Course_Object);
+
+            return Ok(Const.UpdateOperationOk);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(long id)
         {
+            try
+            {
+                Course Course_Object = this._repoWrapper.CourseRepositoryWrapper.GetCourseByCourseID(id);
+                if (null == Course_Object)
+                {
+                    return NotFound();
+                }
+
+                this._repoWrapper.CourseRepositoryWrapper.Delete(Course_Object);
+               
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error");
+            }
         }
     }
 }

@@ -14,5 +14,6 @@ namespace WebApiStudent_Net_Core2.Interfaces
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);
+        void Save();
     }
 }

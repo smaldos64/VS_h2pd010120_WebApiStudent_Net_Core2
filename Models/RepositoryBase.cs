@@ -39,16 +39,24 @@ namespace WebApiStudent_Net_Core2.Models
         public void Create(T entity)
         {
             this.RepositoryContext.Set<T>().Add(entity);
+            this.Save();
         }
 
         public void Update(T entity)
         {
             this.RepositoryContext.Set<T>().Update(entity);
+            this.Save();
         }
 
         public void Delete(T entity)
         {
             this.RepositoryContext.Set<T>().Remove(entity);
+            this.Save();
+        }
+
+        public void Save()
+        {
+            this.RepositoryContext.SaveChanges();
         }
     }
 }
