@@ -51,61 +51,96 @@ namespace WebApiStudent_Net_Core2.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Course Course_Object, string UserName, string Password)
         {
-            if (null == Course_Object)
-            {
-                return BadRequest("Course is null.");
-            }
+            int UserID = Const.OperationOkHigherValueThanHere;
 
-            this._repoWrapper.CourseRepositoryWrapper.Create(Course_Object);
-            
-            return Ok(Course_Object.CourseID);
+            UserID = this._repoWrapper.UserInfoRepositoryWrapper.FindUserInDatabase(UserName, Password);
+
+            if (Const.UserNotFound < UserID)
+            {
+                if (Course_Object.IsObjectNullGeneric())
+                {
+                    return BadRequest("Course is null.");
+                }
+
+                this._repoWrapper.CourseRepositoryWrapper.Create(Course_Object);
+
+                return Ok(Course_Object.CourseID);
+            }
+            else
+            {
+                return Ok(Const.UserNotFound);
+            }
         }
 
         // PUT: api/CourseWrap/5
         [HttpPut("{id}")]
         public IActionResult Put(long id, [FromBody] Course Course_Object, string UserName, string Password)
         {
-            if (null == Course_Object)
+            int UserID = Const.OperationOkHigherValueThanHere;
+
+            UserID = this._repoWrapper.UserInfoRepositoryWrapper.FindUserInDatabase(UserName, Password);
+
+            if (Const.UserNotFound < UserID)
             {
-                return BadRequest("Course is null.");
-            }
+                if (Course_Object.IsObjectNullGeneric())
+                {
+                    return BadRequest("Course is null.");
+                }
 
-            if (!ModelState.IsValid)
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Invalid model object");
+                }
+
+                var dbCourse = this._repoWrapper.CourseRepositoryWrapper.GetCourseByCourseID(id);
+
+                if (dbCourse.IsEmptyObjectGeneric())
+                {
+                    return Ok(Const.ObjectNotFound);
+                }
+
+                this._repoWrapper.CourseRepositoryWrapper.UpdateCourse(dbCourse, Course_Object);
+
+                return Ok(Const.UpdateOperationOk);
+            }
+            else
             {
-                return BadRequest("Invalid model object");
+                return Ok(Const.UserNotFound);
             }
-
-            var dbCourse = this._repoWrapper.CourseRepositoryWrapper.GetCourseByCourseID(id);
-
-            if (dbCourse.IsEmptyObjectGeneric())
-            {
-                return Ok(Const.ObjectNotFound);
-            }
-
-            this._repoWrapper.CourseRepositoryWrapper.UpdateCourse(dbCourse, Course_Object);
-
-            return Ok(Const.UpdateOperationOk);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(long id, string UserName, string Password)
         {
-            try
-            {
-                Course Course_Object = this._repoWrapper.CourseRepositoryWrapper.GetCourseByCourseID(id);
-                if (null == Course_Object)
-                {
-                    return NotFound();
-                }
+            int UserID = Const.OperationOkHigherValueThanHere; 
 
-                this._repoWrapper.CourseRepositoryWrapper.Delete(Course_Object);
-               
-                return NoContent();
-            }
-            catch (Exception ex)
+            UserID = this._repoWrapper.UserInfoRepositoryWrapper.FindUserInDatabase(UserName, Password);
+
+            if (Const.UserNotFound < UserID)
             {
-                return StatusCode(500, "Internal server error");
+                try
+                {
+                    Course Course_Object = this._repoWrapper.CourseRepositoryWrapper.GetCourseByCourseID(id);
+                    if (Course_Object.IsEmptyObjectGeneric())
+                    {
+                        //return NotFound();
+                        return Ok(Const.ObjectNotFound);
+                    }
+
+                    this._repoWrapper.CourseRepositoryWrapper.Delete(Course_Object);
+
+                    //return NoContent();
+                    return Ok(Const.DeleteOperationOk);
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, "Internal server error");
+                }
+            }
+            else
+            {
+                return Ok(Const.UserNotFound);
             }
         }
     }

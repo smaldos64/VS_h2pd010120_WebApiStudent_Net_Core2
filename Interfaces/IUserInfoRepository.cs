@@ -9,5 +9,8 @@ namespace WebApiStudent_Net_Core2.Interfaces
 {
     public interface IUserInfoRepository : IRepositoryBase<UserInfo>
     {
+        public int FindUserInDatabase(string UserNanme, string Password);
+        public int CheckForUserInDatabase(int UserID, string UserName);
+        public bool CheckForUserInDatabaseCreation(string UserName);
     }
 }
