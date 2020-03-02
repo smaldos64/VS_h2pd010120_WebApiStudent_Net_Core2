@@ -35,6 +35,7 @@ namespace WebApiStudent_Net_Core2
         {
             services.ConfigureCors();
             services.ConfigureIISIntegration();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.ConfigureSqlContext(Configuration);
             //services.AddDbContext<DatabaseContext>(options =>
@@ -59,7 +60,7 @@ namespace WebApiStudent_Net_Core2
 
             app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
 
             app.UseCors("CorsPolicy");
 

@@ -55,6 +55,7 @@ namespace WebApiStudent_Net_Core2.Controllers
 
         // GET: api/LogData/5
         [HttpGet("{UserName}", Name = "Get")]
+        [ActionName("GetLogData")]
         public IActionResult Get(string UserName)
         {
             IEnumerable<LogData> LogDataList = this._dataRepository.GetAll();

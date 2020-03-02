@@ -9,5 +9,8 @@ namespace WebApiStudent_Net_Core2.Interfaces
 {
     public interface ILogDataRepository : IRepositoryBase<LogData>
     {
+        public bool LogDataToDatabase(string LogDataUserName,
+                                      DataBaseOperation ThisDataBaseOperation,
+                                      ModelDatabaseNumber ThisModelDatabaseNumber);
     }
 }

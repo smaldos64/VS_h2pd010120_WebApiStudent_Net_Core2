@@ -25,6 +25,7 @@ namespace WebApiStudent_Net_Core2.Controllers
 
         // GET: api/CourseWrap
         [HttpGet]
+        [ActionName("GetCourses")]
         public IActionResult Get()
         {
             IEnumerable<Course> CourseList = this._repoWrapper.CourseRepositoryWrapper.FindAll();
@@ -35,6 +36,7 @@ namespace WebApiStudent_Net_Core2.Controllers
 
         // GET: api/CourseWrap/5
         [HttpGet("{id}", Name = "Get")]
+        [ActionName("GetCourse")]
         public IActionResult Get(int id)
         {
             Course Course_Object = this._repoWrapper.CourseRepositoryWrapper.GetCourseByCourseID(id);
@@ -63,6 +65,8 @@ namespace WebApiStudent_Net_Core2.Controllers
                 }
 
                 this._repoWrapper.CourseRepositoryWrapper.Create(Course_Object);
+
+                this._repoWrapper.LogDataRepositoryWrapper.LogDataToDatabase(UserName, DataBaseOperation.SaveData_Enum, ModelDatabaseNumber.Course_Enum);
 
                 return Ok(Course_Object.CourseID);
             }
@@ -101,6 +105,8 @@ namespace WebApiStudent_Net_Core2.Controllers
 
                 this._repoWrapper.CourseRepositoryWrapper.UpdateCourse(dbCourse, Course_Object);
 
+                this._repoWrapper.LogDataRepositoryWrapper.LogDataToDatabase(UserName, DataBaseOperation.UpdateData_Enum, ModelDatabaseNumber.Course_Enum);
+
                 return Ok(Const.UpdateOperationOk);
             }
             else
@@ -129,6 +135,8 @@ namespace WebApiStudent_Net_Core2.Controllers
                     }
 
                     this._repoWrapper.CourseRepositoryWrapper.Delete(Course_Object);
+
+                    this._repoWrapper.LogDataRepositoryWrapper.LogDataToDatabase(UserName, DataBaseOperation.DeleteData_Enum, ModelDatabaseNumber.Course_Enum);
 
                     //return NoContent();
                     return Ok(Const.DeleteOperationOk);
