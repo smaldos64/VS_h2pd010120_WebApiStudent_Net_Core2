@@ -19,7 +19,8 @@ namespace WebApiStudent_Net_Core2.Controllers
         }
 
         // GET: api/UserInfoWrap/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
+        //[HttpGet("{id}", Name = "Get")]
         public string Get(int id)
         {
             return "value";

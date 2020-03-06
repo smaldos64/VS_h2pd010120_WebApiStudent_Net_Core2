@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +12,18 @@
     <Compile Remove="Controllers\UserInfoController.cs" />
     <Compile Remove="Extensions\EntityExtensions.cs" />
     <Compile Remove="Interfaces\IDataRepositoryUserInfo.cs" />
+    <Compile Remove="Models\DataManager\CourseManager.cs" />
+    <Compile Remove="Models\DataManager\LogDataManager.cs" />
+    <Compile Remove="Models\DataManager\UserInfoManager.cs" />
     <Compile Remove="Tools\ProjectConst.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Index.html" />
   </ItemGroup>
 
   <ItemGroup>

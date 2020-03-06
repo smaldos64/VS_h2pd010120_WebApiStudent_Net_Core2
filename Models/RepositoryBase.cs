@@ -32,7 +32,7 @@ namespace WebApiStudent_Net_Core2.Models
 
         public List<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            ParameterExpression s = Expression.Parameter(typeof(T));
+            //ParameterExpression s = Expression.Parameter(typeof(T));
             return this.RepositoryContext.Set<T>().Where(expression).AsNoTracking().ToList();
         }
 
@@ -56,7 +56,8 @@ namespace WebApiStudent_Net_Core2.Models
 
         public void Save()
         {
-            this.RepositoryContext.SaveChanges();
+            int NumberOfObjectsSaved = -1;
+            NumberOfObjectsSaved = this.RepositoryContext.SaveChanges();
         }
     }
 }

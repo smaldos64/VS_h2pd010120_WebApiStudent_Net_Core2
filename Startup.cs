@@ -41,9 +41,9 @@ namespace WebApiStudent_Net_Core2
             //services.AddDbContext<DatabaseContext>(options =>
             //        options.UseSqlServer(Configuration.GetConnectionString("connectionString")));
 
-            services.AddScoped<IDataRepository<Course>, CourseManager>();
-            services.AddScoped<IDataRepository<LogData>, LogDataManager>();
-            services.AddScoped<IDataRepository<UserInfo>, UserInfoManager>();
+            //services.AddScoped<IDataRepository<Course>, CourseManager>();
+            //services.AddScoped<IDataRepository<LogData>, LogDataManager>();
+            //services.AddScoped<IDataRepository<UserInfo>, UserInfoManager>();
 
             services.ConfigureRepositoryWrapper();
 

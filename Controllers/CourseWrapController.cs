@@ -20,12 +20,11 @@ namespace WebApiStudent_Net_Core2.Controllers
 
         public CourseWrapController(IRepositoryWrapper repoWrapper)
         {
-            _repoWrapper = repoWrapper;
+            this._repoWrapper = repoWrapper;
         }
 
         // GET: api/CourseWrap
         [HttpGet]
-        [ActionName("GetCourses")]
         public IActionResult Get()
         {
             IEnumerable<Course> CourseList = this._repoWrapper.CourseRepositoryWrapper.FindAll();
@@ -35,8 +34,10 @@ namespace WebApiStudent_Net_Core2.Controllers
         }
 
         // GET: api/CourseWrap/5
-        [HttpGet("{id}", Name = "Get")]
-        [ActionName("GetCourse")]
+        [HttpGet("{id}")]
+        //[HttpGet("{id}", Name = "Get")]
+        // Hvis man bruger Name attribut her, får man en kørselfejl, hvis man har flere 
+        // Controllers i sit projekt => hvilket man jo typisk har !!!
         public IActionResult Get(int id)
         {
             Course Course_Object = this._repoWrapper.CourseRepositoryWrapper.GetCourseByCourseID(id);
