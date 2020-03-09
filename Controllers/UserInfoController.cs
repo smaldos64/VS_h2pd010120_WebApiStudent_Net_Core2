@@ -9,16 +9,16 @@ namespace WebApiStudent_Net_Core2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserInfoWrapController : ControllerBase
+    public class UserInfoController : ControllerBase
     {
-        // GET: api/UserInfoWrap
+        // GET: api/UserInfo
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/UserInfoWrap/5
+        // GET: api/UserInfo/5
         [HttpGet("{id}")]
         //[HttpGet("{id}", Name = "Get")]
         public string Get(int id)
@@ -26,19 +26,19 @@ namespace WebApiStudent_Net_Core2.Controllers
             return "value";
         }
 
-        // POST: api/UserInfoWrap
+        // POST: api/UserInfo
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT: api/UserInfoWrap/5
+        // PUT: api/UserInfo/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/UserInfo/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

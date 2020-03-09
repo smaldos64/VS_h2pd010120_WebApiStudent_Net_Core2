@@ -14,16 +14,16 @@ namespace WebApiStudent_Net_Core2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CourseWrapController : ControllerBase
+    public class CourseController : ControllerBase
     {
         private IRepositoryWrapper _repoWrapper;
 
-        public CourseWrapController(IRepositoryWrapper repoWrapper)
+        public CourseController(IRepositoryWrapper repoWrapper)
         {
             this._repoWrapper = repoWrapper;
         }
 
-        // GET: api/CourseWrap
+        // GET: api/Course
         [HttpGet]
         public IActionResult Get()
         {
@@ -33,7 +33,7 @@ namespace WebApiStudent_Net_Core2.Controllers
             return Ok(CourseList);
         }
 
-        // GET: api/CourseWrap/5
+        // GET: api/Course/5
         [HttpGet("{id}")]
         //[HttpGet("{id}", Name = "Get")]
         // Hvis man bruger Name attribut her, får man en kørselfejl, hvis man har flere 
@@ -50,7 +50,7 @@ namespace WebApiStudent_Net_Core2.Controllers
             return Ok(Course_Object);
         }
 
-        // POST: api/CourseWrap
+        // POST: api/Course
         [HttpPost]
         public IActionResult Post([FromBody] Course Course_Object, string UserName, string Password)
         {
@@ -77,7 +77,7 @@ namespace WebApiStudent_Net_Core2.Controllers
             }
         }
 
-        // PUT: api/CourseWrap/5
+        // PUT: api/Course/5
         [HttpPut("{id}")]
         public IActionResult Put(long id, string UserName, string Password, [FromBody] Course Course_Object)
         {
@@ -116,7 +116,7 @@ namespace WebApiStudent_Net_Core2.Controllers
             }
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/Course/5
         [HttpDelete("{id}")]
         public IActionResult Delete(long id, string UserName, string Password)
         {

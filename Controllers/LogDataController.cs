@@ -15,16 +15,16 @@ namespace WebApiStudent_Net_Core2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LogDataWrapController : ControllerBase
+    public class LogDataController : ControllerBase
     {
         private IRepositoryWrapper _repoWrapper;
 
-        public LogDataWrapController(IRepositoryWrapper repoWrapper)
+        public LogDataController(IRepositoryWrapper repoWrapper)
         {
             _repoWrapper = repoWrapper;
         }
 
-        // GET: api/LogDataWrap
+        // GET: api/LogData
         [HttpGet]
         public IActionResult Get()
         {
@@ -33,7 +33,7 @@ namespace WebApiStudent_Net_Core2.Controllers
             return Ok(VM_LogDataList);
         }
 
-        // GET: api/LogDataWrap/5
+        // GET: api/LogData/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -60,21 +60,21 @@ namespace WebApiStudent_Net_Core2.Controllers
         //    return Ok(VM_LogDataList);
         //}
 
-        // POST: api/LogDataWrap
+        // POST: api/LogData
         [HttpPost]
         public IActionResult Post([FromBody] string value)
         {
             return Ok(Const.FeatureNotImplemented);
         }
 
-        // PUT: api/LogDataWrap/5
+        // PUT: api/LogData/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] Course Course_Object)
         {
             return Ok(Const.FeatureNotImplemented);
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/LogData/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
