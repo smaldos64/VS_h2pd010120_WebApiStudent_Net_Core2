@@ -81,6 +81,9 @@ namespace WebApiStudent_Net_Core2.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(long id, string UserName, string Password, [FromBody] Course Course_Object)
         {
+#if ASPNET_CORE_BUG
+            Course_Object.CourseID = (int)id;
+#endif
             int UserID = Const.OperationOkHigherValueThanHere;
 
             UserID = this._repoWrapper.UserInfoRepositoryWrapper.FindUserInDatabase(UserName, Password);
