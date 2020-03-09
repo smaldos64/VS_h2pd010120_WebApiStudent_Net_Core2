@@ -79,7 +79,7 @@ namespace WebApiStudent_Net_Core2.Controllers
 
         // PUT: api/CourseWrap/5
         [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody] Course Course_Object, string UserName, string Password)
+        public IActionResult Put(long id, string UserName, string Password, [FromBody] Course Course_Object)
         {
             int UserID = Const.OperationOkHigherValueThanHere;
 

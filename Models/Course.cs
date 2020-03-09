@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 
 using WebApiStudent_Net_Core2.Interfaces;
-//using WebApiStudentData.ConstDeclarations;
 
 namespace WebApiStudent_Net_Core2.Models
 {
