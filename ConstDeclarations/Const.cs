@@ -101,29 +101,54 @@ namespace WebApiStudent_Net_Core2.ConstDeclarations
         public const int SaveOperationOk = 2;
         public const int DeleteOperationOk = 3;
 
-        public static readonly ReturnCodeAndReturnString[] ReturnCodesAndReturnStrings =
+        //public static readonly ReturnCodeAndReturnString[] ReturnCodesAndReturnStrings =
+        //{
+        //    new ReturnCodeAndReturnString(ReturnCode : UserAlreadySignedUpForEducation, ReturnString : "Studerende er allerede tilmeldt dette Uddannelsesforløb på dette tidspunkt"),
+        //    new ReturnCodeAndReturnString(ReturnCode : WrongjSonObjectParameters, ReturnString : "Én eller flere af de forventede parametre i det give jSon objekt mangler !!!"),
+        //    new ReturnCodeAndReturnString(ReturnCode : SpecifiedContentStillInUseInTablesBelow, ReturnString : "ID i denne tabel der ønsket slettet er stadigvæk i brug i underliggende tabeller. Slet i disse tabeller først !!!"),
+        //    new ReturnCodeAndReturnString(ReturnCode : WrongCharacterScaleProvided, ReturnString : "Forkert ID for karakterskale angivet"),
+        //    new ReturnCodeAndReturnString(ReturnCode : WrongCharacterProvided, ReturnString : "Forkert karakterværdi i forhold til valgt karakterskala angivet"),
+        //    new ReturnCodeAndReturnString(ReturnCode : NoCharacterProvidedButCharacterScaleProvided, ReturnString : "Ingen karakterværdi angivet selvom karakterskala er angivet"),
+        //    new ReturnCodeAndReturnString(ReturnCode : CharacterProvidedButNoCharacterScaleProvided, ReturnString : "Ingen karakterskala angivet selvom karakterværdi er angivet"),
+        //    new ReturnCodeAndReturnString(ReturnCode : InformationNotProvided, ReturnString : "Information er ikke gemt"),
+        //    new ReturnCodeAndReturnString(ReturnCode : ObjectNotSavedByCurrentUserOriginally, ReturnString : "Objekt er ikke gemt af nuværende bruger oprindeligt !!!"),
+        //    new ReturnCodeAndReturnString(ReturnCode : UserNameAlreadyPresent, ReturnString : "Brugernavn eksisterer allerede !!!"),
+        //    new ReturnCodeAndReturnString(ReturnCode : FeatureNotImplemented, ReturnString : "Feature er ikke implementeret/er ikke enabled !!!"),
+        //    new ReturnCodeAndReturnString(ReturnCode : ObjectNotFound, ReturnString : "objekt er ikke fundet !!!"),
+        //    new ReturnCodeAndReturnString(ReturnCode : ObjectAlreadyPresent, ReturnString : "objekt er allerede tilgængelig !!!"),
+        //    new ReturnCodeAndReturnString(ReturnCode : SaveOperationFailed, ReturnString : "Fejl under lagring af objekt !!!"),
+        //    new ReturnCodeAndReturnString(ReturnCode : UpdateOperationFailed, ReturnString : "Fejl under opdatering af objekt !!!"),
+        //    new ReturnCodeAndReturnString(ReturnCode : DeleteOperationFailed, ReturnString : "Fejl under sletning af objekt !!!"),
+        //    new ReturnCodeAndReturnString(ReturnCode : UserNotFound, ReturnString : "Bruger ikke fundet !!!"),
+        //    new ReturnCodeAndReturnString(ReturnCode : OperationOkHigherValueThanHere, ReturnString : "Returværdier større end denne værdi er ok returværdier"),
+        //    new ReturnCodeAndReturnString(ReturnCode : UpdateOperationOk, ReturnString : "Objekt er opdateret korrekt"),
+        //    new ReturnCodeAndReturnString(ReturnCode : SaveOperationOk, ReturnString : "Objekt er gemt korrekt"),
+        //    new ReturnCodeAndReturnString(ReturnCode : DeleteOperationOk, ReturnString : "Objekt er slettet korrekt")
+        //};
+
+        public static readonly ReturnCodesAndStrings[] ReturnCodesAndReturnStringsArray =
         {
-            new ReturnCodeAndReturnString(ReturnCode : UserAlreadySignedUpForEducation, ReturnString : "Studerende er allerede tilmeldt dette Uddannelsesforløb på dette tidspunkt"),
-            new ReturnCodeAndReturnString(ReturnCode : WrongjSonObjectParameters, ReturnString : "Én eller flere af de forventede parametre i det give jSon objekt mangler !!!"),
-            new ReturnCodeAndReturnString(ReturnCode : SpecifiedContentStillInUseInTablesBelow, ReturnString : "ID i denne tabel der ønsket slettet er stadigvæk i brug i underliggende tabeller. Slet i disse tabeller først !!!"),
-            new ReturnCodeAndReturnString(ReturnCode : WrongCharacterScaleProvided, ReturnString : "Forkert ID for karakterskale angivet"),
-            new ReturnCodeAndReturnString(ReturnCode : WrongCharacterProvided, ReturnString : "Forkert karakterværdi i forhold til valgt karakterskala angivet"),
-            new ReturnCodeAndReturnString(ReturnCode : NoCharacterProvidedButCharacterScaleProvided, ReturnString : "Ingen karakterværdi angivet selvom karakterskala er angivet"),
-            new ReturnCodeAndReturnString(ReturnCode : CharacterProvidedButNoCharacterScaleProvided, ReturnString : "Ingen karakterskala angivet selvom karakterværdi er angivet"),
-            new ReturnCodeAndReturnString(ReturnCode : InformationNotProvided, ReturnString : "Information er ikke gemt"),
-            new ReturnCodeAndReturnString(ReturnCode : ObjectNotSavedByCurrentUserOriginally, ReturnString : "Objekt er ikke gemt af nuværende bruger oprindeligt !!!"),
-            new ReturnCodeAndReturnString(ReturnCode : UserNameAlreadyPresent, ReturnString : "Brugernavn eksisterer allerede !!!"),
-            new ReturnCodeAndReturnString(ReturnCode : FeatureNotImplemented, ReturnString : "Feature er ikke implementeret/er ikke enabled !!!"),
-            new ReturnCodeAndReturnString(ReturnCode : ObjectNotFound, ReturnString : "objekt er ikke fundet !!!"),
-            new ReturnCodeAndReturnString(ReturnCode : ObjectAlreadyPresent, ReturnString : "objekt er allerede tilgængelig !!!"),
-            new ReturnCodeAndReturnString(ReturnCode : SaveOperationFailed, ReturnString : "Fejl under lagring af objekt !!!"),
-            new ReturnCodeAndReturnString(ReturnCode : UpdateOperationFailed, ReturnString : "Fejl under opdatering af objekt !!!"),
-            new ReturnCodeAndReturnString(ReturnCode : DeleteOperationFailed, ReturnString : "Fejl under sletning af objekt !!!"),
-            new ReturnCodeAndReturnString(ReturnCode : UserNotFound, ReturnString : "Bruger ikke fundet !!!"),
-            new ReturnCodeAndReturnString(ReturnCode : OperationOkHigherValueThanHere, ReturnString : "Returværdier større end denne værdi er ok returværdier"),
-            new ReturnCodeAndReturnString(ReturnCode : UpdateOperationOk, ReturnString : "Objekt er opdateret korrekt"),
-            new ReturnCodeAndReturnString(ReturnCode : SaveOperationOk, ReturnString : "Objekt er gemt korrekt"),
-            new ReturnCodeAndReturnString(ReturnCode : DeleteOperationOk, ReturnString : "Objekt er slettet korrekt")
+            new ReturnCodesAndStrings(ReturnCode : UserAlreadySignedUpForEducation, ReturnString : "Studerende er allerede tilmeldt dette Uddannelsesforløb på dette tidspunkt"),
+            new ReturnCodesAndStrings(ReturnCode : WrongjSonObjectParameters, ReturnString : "Én eller flere af de forventede parametre i det give jSon objekt mangler !!!"),
+            new ReturnCodesAndStrings(ReturnCode : SpecifiedContentStillInUseInTablesBelow, ReturnString : "ID i denne tabel der ønsket slettet er stadigvæk i brug i underliggende tabeller. Slet i disse tabeller først !!!"),
+            new ReturnCodesAndStrings(ReturnCode : WrongCharacterScaleProvided, ReturnString : "Forkert ID for karakterskale angivet"),
+            new ReturnCodesAndStrings(ReturnCode : WrongCharacterProvided, ReturnString : "Forkert karakterværdi i forhold til valgt karakterskala angivet"),
+            new ReturnCodesAndStrings(ReturnCode : NoCharacterProvidedButCharacterScaleProvided, ReturnString : "Ingen karakterværdi angivet selvom karakterskala er angivet"),
+            new ReturnCodesAndStrings(ReturnCode : CharacterProvidedButNoCharacterScaleProvided, ReturnString : "Ingen karakterskala angivet selvom karakterværdi er angivet"),
+            new ReturnCodesAndStrings(ReturnCode : InformationNotProvided, ReturnString : "Information er ikke gemt"),
+            new ReturnCodesAndStrings(ReturnCode : ObjectNotSavedByCurrentUserOriginally, ReturnString : "Objekt er ikke gemt af nuværende bruger oprindeligt !!!"),
+            new ReturnCodesAndStrings(ReturnCode : UserNameAlreadyPresent, ReturnString : "Brugernavn eksisterer allerede !!!"),
+            new ReturnCodesAndStrings(ReturnCode : FeatureNotImplemented, ReturnString : "Feature er ikke implementeret/er ikke enabled !!!"),
+            new ReturnCodesAndStrings(ReturnCode : ObjectNotFound, ReturnString : "objekt er ikke fundet !!!"),
+            new ReturnCodesAndStrings(ReturnCode : ObjectAlreadyPresent, ReturnString : "objekt er allerede tilgængelig !!!"),
+            new ReturnCodesAndStrings(ReturnCode : SaveOperationFailed, ReturnString : "Fejl under lagring af objekt !!!"),
+            new ReturnCodesAndStrings(ReturnCode : UpdateOperationFailed, ReturnString : "Fejl under opdatering af objekt !!!"),
+            new ReturnCodesAndStrings(ReturnCode : DeleteOperationFailed, ReturnString : "Fejl under sletning af objekt !!!"),
+            new ReturnCodesAndStrings(ReturnCode : UserNotFound, ReturnString : "Bruger ikke fundet !!!"),
+            new ReturnCodesAndStrings(ReturnCode : OperationOkHigherValueThanHere, ReturnString : "Returværdier større end denne værdi er ok returværdier"),
+            new ReturnCodesAndStrings(ReturnCode : UpdateOperationOk, ReturnString : "Objekt er opdateret korrekt"),
+            new ReturnCodesAndStrings(ReturnCode : SaveOperationOk, ReturnString : "Objekt er gemt korrekt"),
+            new ReturnCodesAndStrings(ReturnCode : DeleteOperationOk, ReturnString : "Objekt er slettet korrekt")
         };
 
         public static string FindReturnString(int ReturnCode)
@@ -132,15 +157,15 @@ namespace WebApiStudent_Net_Core2.ConstDeclarations
 
             do
             {
-                if (ReturnCodesAndReturnStrings[ReturnStringCounter].ReturnCode == ReturnCode)
+                if (ReturnCodesAndReturnStringsArray[ReturnStringCounter].ReturnCode == ReturnCode)
                 {
-                    return (ReturnCodesAndReturnStrings[ReturnStringCounter].ReturnString);
+                    return (ReturnCodesAndReturnStringsArray[ReturnStringCounter].ReturnString);
                 }
                 else
                 {
                     ReturnStringCounter++;
                 }
-            } while (ReturnStringCounter < ReturnCodesAndReturnStrings.Length);
+            } while (ReturnStringCounter < ReturnCodesAndReturnStringsArray.Length);
 
             return ("Ingen string fundet der hører til søgt nummer !!!");
         }

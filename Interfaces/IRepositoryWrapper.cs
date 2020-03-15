@@ -10,6 +10,8 @@ namespace WebApiStudent_Net_Core2.Interfaces
         ICourseRepository CourseRepositoryWrapper { get; }
         ILogDataRepository LogDataRepositoryWrapper { get; }
         IUserInfoRepository UserInfoRepositoryWrapper { get; }
+
+        IReturnCodesAndStringsRepository ReturnCodesAndStringsWrapper { get; }
         void Save();
     }
 }

@@ -14,6 +14,7 @@ namespace WebApiStudent_Net_Core2.Models.DataManager
         private ICourseRepository _courseRepositoryWrapper;
         private ILogDataRepository _logDataRepositoryWrapper;
         private IUserInfoRepository _userInfoRepositoryWrapper;
+        private IReturnCodesAndStringsRepository _returnCodesAndStringsWrapper;
 
         public ICourseRepository CourseRepositoryWrapper
         {
@@ -51,6 +52,19 @@ namespace WebApiStudent_Net_Core2.Models.DataManager
                 }
 
                 return _userInfoRepositoryWrapper;
+            }
+        }
+
+        public IReturnCodesAndStringsRepository ReturnCodesAndStringsWrapper
+        {
+            get
+            {
+                if (_returnCodesAndStringsWrapper == null)
+                {
+                    _returnCodesAndStringsWrapper = new ReturnCodesAndStringsRepository(_repoContext);
+                }
+
+                return _returnCodesAndStringsWrapper;
             }
         }
 
