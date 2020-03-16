@@ -17,6 +17,42 @@ namespace WebApiStudent_Net_Core2.Models.DataManager
         {
         }
 
+        public IQueryable<UserInfo> FindAllUserInfo()
+        {
+#if (DEBUG_USER)
+            List<UserInfo> UserInfoList = base.FindAll().ToList();
+                      
+            for (int Counter = 0; Counter < UserInfoList.Count(); Counter++)
+            {
+                UserInfoList[Counter].UserPassword = Crypto.Decrypt(UserInfoList[Counter].UserPassword);
+            }
+            
+            return (UserInfoList.AsQueryable());
+#else
+            return (base.FindAll());
+#endif
+
+        }
+
+        public UserInfo GetUserByUserNameAndPassWord(string UserName, string Password)
+        {
+            UserInfo UserInfo_Object = new UserInfo();
+            int UserID = Const.UserNotFound;
+
+            if ((UserID = this.FindUserInDatabase(UserName, Password)) >= Const.DataBaseZeroValue)
+            {
+                UserInfo_Object = FindByCondition(u => u.UserInfoID == UserID)
+                .DefaultIfEmpty(new UserInfo())
+                .FirstOrDefault();
+            }
+            catch (Exception error)
+            {
+
+            }
+
+            return (UserInfo_Object);
+        }
+
         public int FindUserInDatabase(string UserNanme, string Password)
         {
             List<UserInfo> UserInfo_List = this.RepositoryContext.UserInfoes.ToList();

@@ -68,32 +68,5 @@ namespace WebApiStudent_Net_Core2.Models
         public DataBaseOperation ThisDataBaseOperation { get; set; }
 
         public ModelDatabaseNumber ThisModelDatabaseNumber { get; set; }
-
-        //private static DatabaseContext db = new DatabaseContext();
-
-        //public static bool LogDataToDatabase(string LogDataUserName, 
-        //                              DataBaseOperation ThisDataBaseOperation,
-        //                              ModelDatabaseNumber ThisModelDatabaseNumber)
-        //{
-        //    int NumberOfLogDatasSaved = 0;
-        //    LogData LogData_Object = new LogData();
-
-        //    LogData_Object.LogDataDateTime = DateTime.Now;
-        //    LogData_Object.LogDataUserName = LogDataUserName;
-        //    LogData_Object.ThisDataBaseOperation = ThisDataBaseOperation;
-        //    LogData_Object.ThisModelDatabaseNumber = ThisModelDatabaseNumber;
-
-        //    db.LogDatas.Add(LogData_Object);
-        //    NumberOfLogDatasSaved = db.SaveChanges();
-
-        //    if (1 == NumberOfLogDatasSaved)
-        //    {
-        //        return (true);
-        //    }
-        //    else
-        //    {
-        //        return (false);
-        //    }
-        //}
     }
 }

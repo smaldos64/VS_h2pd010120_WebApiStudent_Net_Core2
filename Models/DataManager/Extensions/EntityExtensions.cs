@@ -5,13 +5,14 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 using WebApiStudent_Net_Core2.Interfaces;
+using WebApiStudent_Net_Core2.ConstDeclarations;
 
 namespace WebApiStudent_Net_Core2.Models.DataManager.Extensions
 {
     public static class EntityExtensions
     {
 
-        private static int DataBaseZeroValue = 0;
+        //private static int DataBaseZeroValue = 0;
         public static bool IsObjectNull(this IEntity entity)
         {
             return entity == null;
@@ -57,6 +58,7 @@ namespace WebApiStudent_Net_Core2.Models.DataManager.Extensions
 
         public static bool IsEmptyObjectGeneric<T>(this T obj)
         {
+            //FirstObjectProperty.GetValue(obj).GetType().GetProperties()[0]
             PropertyInfo FirstObjectProperty = obj.GetType().GetProperties()[0];
 
             if (typeof(int) == FirstObjectProperty.PropertyType)
@@ -65,7 +67,7 @@ namespace WebApiStudent_Net_Core2.Models.DataManager.Extensions
                 try
                 {
                     Value = FirstObjectProperty.GetValue(obj);
-                    if (DataBaseZeroValue != Value)
+                    if (Const.DataBaseZeroValue != Value)
                     {
                         return (false);
                     }

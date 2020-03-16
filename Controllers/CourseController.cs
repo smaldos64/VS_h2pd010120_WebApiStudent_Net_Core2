@@ -28,8 +28,11 @@ namespace WebApiStudent_Net_Core2.Controllers
         public IActionResult Get()
         {
             IEnumerable<Course> CourseList = this._repoWrapper.CourseRepositoryWrapper.FindAll();
-            IEnumerable<LogData> LogDataList = this._repoWrapper.LogDataRepositoryWrapper.FindAll();
-            IEnumerable<UserInfo> UserInfoList = this._repoWrapper.UserInfoRepositoryWrapper.FindAll();
+            // De 2 linjer kode herunder har ikke nogen praksisk betydning her. De er kun
+            // medtaget for at vise, hvor let det er at tilgå andre Repository Wrappers
+            // også !!!
+            //IEnumerable<LogData> LogDataList = this._repoWrapper.LogDataRepositoryWrapper.FindAll();
+            //IEnumerable<UserInfo> UserInfoList = this._repoWrapper.UserInfoRepositoryWrapper.FindAll();
             return Ok(CourseList);
         }
 
@@ -44,7 +47,7 @@ namespace WebApiStudent_Net_Core2.Controllers
            
             if (null == Course_Object)
             {
-                return NotFound("The Course record couldn't be found.");
+                Ok(Const.GenerateReturnNumberString(Const.ObjectNotFound));
             }
 
             return Ok(Course_Object);
@@ -58,11 +61,12 @@ namespace WebApiStudent_Net_Core2.Controllers
 
             UserID = this._repoWrapper.UserInfoRepositoryWrapper.FindUserInDatabase(UserName, Password);
 
-            if (Const.UserNotFound < UserID)
+            if (Const.DataBaseZeroValue < UserID)
             {
                 if (Course_Object.IsObjectNullGeneric())
                 {
-                    return BadRequest("Course is null.");
+                    return Ok(Const.GenerateReturnNumberString(Const.WrongjSonObjectParameters));
+                    //return BadRequest("Course is null.");
                 }
 
                 this._repoWrapper.CourseRepositoryWrapper.Create(Course_Object);
@@ -73,7 +77,7 @@ namespace WebApiStudent_Net_Core2.Controllers
             }
             else
             {
-                return Ok(Const.UserNotFound);
+                return Ok(Const.GenerateReturnNumberString(Const.ObjectNotFound));
             }
         }
 
@@ -92,19 +96,21 @@ namespace WebApiStudent_Net_Core2.Controllers
             {
                 if (Course_Object.IsObjectNullGeneric())
                 {
-                    return BadRequest("Course is null.");
+                    //return BadRequest("Course is null.");
+                    return Ok(Const.GenerateReturnNumberString(Const.WrongjSonObjectParameters));
                 }
 
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest("Invalid model object");
+                    //return BadRequest("Invalid model object");
+                    return Ok(Const.GenerateReturnNumberString(Const.WrongModelState));
                 }
 
                 var dbCourse = this._repoWrapper.CourseRepositoryWrapper.GetCourseByCourseID(id);
 
                 if (dbCourse.IsEmptyObjectGeneric())
                 {
-                    return Ok(Const.ObjectNotFound);
+                    return Ok(Const.GenerateReturnNumberString(Const.ObjectNotFound));
                 }
 
                 this._repoWrapper.CourseRepositoryWrapper.UpdateCourse(dbCourse, Course_Object);
@@ -115,7 +121,7 @@ namespace WebApiStudent_Net_Core2.Controllers
             }
             else
             {
-                return Ok(Const.UserNotFound);
+                return Ok(Const.GenerateReturnNumberString(Const.UserNotFound));
             }
         }
 
@@ -134,15 +140,13 @@ namespace WebApiStudent_Net_Core2.Controllers
                     Course Course_Object = this._repoWrapper.CourseRepositoryWrapper.GetCourseByCourseID(id);
                     if (Course_Object.IsEmptyObjectGeneric())
                     {
-                        //return NotFound();
-                        return Ok(Const.ObjectNotFound);
+                        return Ok(Const.GenerateReturnNumberString(Const.ObjectNotFound));
                     }
 
                     this._repoWrapper.CourseRepositoryWrapper.Delete(Course_Object);
 
                     this._repoWrapper.LogDataRepositoryWrapper.LogDataToDatabase(UserName, DataBaseOperation.DeleteData_Enum, ModelDatabaseNumber.Course_Enum);
 
-                    //return NoContent();
                     return Ok(Const.DeleteOperationOk);
                 }
                 catch (Exception ex)
@@ -152,7 +156,7 @@ namespace WebApiStudent_Net_Core2.Controllers
             }
             else
             {
-                return Ok(Const.UserNotFound);
+                return Ok(Const.GenerateReturnNumberString(Const.UserNotFound));
             }
         }
     }

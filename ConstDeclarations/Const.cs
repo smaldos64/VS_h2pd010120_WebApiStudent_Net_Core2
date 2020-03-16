@@ -15,6 +15,8 @@ namespace WebApiStudent_Net_Core2.ConstDeclarations
 
     public class Const
     {
+        public static int DataBaseZeroValue = 0;
+
         public static readonly DataBaseOperationInfo[] DataBaseOperationInfoArray =
         {
             new DataBaseOperationInfo(ThisDataBaseOperation: DataBaseOperation.SaveData_Enum, ThisDataBaseOperationString: "Gemme Data"),
@@ -78,7 +80,9 @@ namespace WebApiStudent_Net_Core2.ConstDeclarations
         public static readonly string PasswordHash = "P@@Sw0rd";
         public static readonly string SaltKey = "S@LT&KEY";
         public static readonly string VIKey = "@1B2c3D4e5F6g7H8";
+        private static readonly string NoReturnStringFound = "Ingen string fundet der hører til søgt nummer !!!";
 
+        public const int WrongModelState = -18;
         public const int UserAlreadySignedUpForEducation = -17;
         public const int WrongjSonObjectParameters = -16;
         public const int SpecifiedContentStillInUseInTablesBelow = -15;
@@ -101,33 +105,9 @@ namespace WebApiStudent_Net_Core2.ConstDeclarations
         public const int SaveOperationOk = 2;
         public const int DeleteOperationOk = 3;
 
-        //public static readonly ReturnCodeAndReturnString[] ReturnCodesAndReturnStrings =
-        //{
-        //    new ReturnCodeAndReturnString(ReturnCode : UserAlreadySignedUpForEducation, ReturnString : "Studerende er allerede tilmeldt dette Uddannelsesforløb på dette tidspunkt"),
-        //    new ReturnCodeAndReturnString(ReturnCode : WrongjSonObjectParameters, ReturnString : "Én eller flere af de forventede parametre i det give jSon objekt mangler !!!"),
-        //    new ReturnCodeAndReturnString(ReturnCode : SpecifiedContentStillInUseInTablesBelow, ReturnString : "ID i denne tabel der ønsket slettet er stadigvæk i brug i underliggende tabeller. Slet i disse tabeller først !!!"),
-        //    new ReturnCodeAndReturnString(ReturnCode : WrongCharacterScaleProvided, ReturnString : "Forkert ID for karakterskale angivet"),
-        //    new ReturnCodeAndReturnString(ReturnCode : WrongCharacterProvided, ReturnString : "Forkert karakterværdi i forhold til valgt karakterskala angivet"),
-        //    new ReturnCodeAndReturnString(ReturnCode : NoCharacterProvidedButCharacterScaleProvided, ReturnString : "Ingen karakterværdi angivet selvom karakterskala er angivet"),
-        //    new ReturnCodeAndReturnString(ReturnCode : CharacterProvidedButNoCharacterScaleProvided, ReturnString : "Ingen karakterskala angivet selvom karakterværdi er angivet"),
-        //    new ReturnCodeAndReturnString(ReturnCode : InformationNotProvided, ReturnString : "Information er ikke gemt"),
-        //    new ReturnCodeAndReturnString(ReturnCode : ObjectNotSavedByCurrentUserOriginally, ReturnString : "Objekt er ikke gemt af nuværende bruger oprindeligt !!!"),
-        //    new ReturnCodeAndReturnString(ReturnCode : UserNameAlreadyPresent, ReturnString : "Brugernavn eksisterer allerede !!!"),
-        //    new ReturnCodeAndReturnString(ReturnCode : FeatureNotImplemented, ReturnString : "Feature er ikke implementeret/er ikke enabled !!!"),
-        //    new ReturnCodeAndReturnString(ReturnCode : ObjectNotFound, ReturnString : "objekt er ikke fundet !!!"),
-        //    new ReturnCodeAndReturnString(ReturnCode : ObjectAlreadyPresent, ReturnString : "objekt er allerede tilgængelig !!!"),
-        //    new ReturnCodeAndReturnString(ReturnCode : SaveOperationFailed, ReturnString : "Fejl under lagring af objekt !!!"),
-        //    new ReturnCodeAndReturnString(ReturnCode : UpdateOperationFailed, ReturnString : "Fejl under opdatering af objekt !!!"),
-        //    new ReturnCodeAndReturnString(ReturnCode : DeleteOperationFailed, ReturnString : "Fejl under sletning af objekt !!!"),
-        //    new ReturnCodeAndReturnString(ReturnCode : UserNotFound, ReturnString : "Bruger ikke fundet !!!"),
-        //    new ReturnCodeAndReturnString(ReturnCode : OperationOkHigherValueThanHere, ReturnString : "Returværdier større end denne værdi er ok returværdier"),
-        //    new ReturnCodeAndReturnString(ReturnCode : UpdateOperationOk, ReturnString : "Objekt er opdateret korrekt"),
-        //    new ReturnCodeAndReturnString(ReturnCode : SaveOperationOk, ReturnString : "Objekt er gemt korrekt"),
-        //    new ReturnCodeAndReturnString(ReturnCode : DeleteOperationOk, ReturnString : "Objekt er slettet korrekt")
-        //};
-
         public static readonly ReturnCodesAndStrings[] ReturnCodesAndReturnStringsArray =
         {
+            new ReturnCodesAndStrings(ReturnCode : WrongModelState, ReturnString : "Wrong Model State"),
             new ReturnCodesAndStrings(ReturnCode : UserAlreadySignedUpForEducation, ReturnString : "Studerende er allerede tilmeldt dette Uddannelsesforløb på dette tidspunkt"),
             new ReturnCodesAndStrings(ReturnCode : WrongjSonObjectParameters, ReturnString : "Én eller flere af de forventede parametre i det give jSon objekt mangler !!!"),
             new ReturnCodesAndStrings(ReturnCode : SpecifiedContentStillInUseInTablesBelow, ReturnString : "ID i denne tabel der ønsket slettet er stadigvæk i brug i underliggende tabeller. Slet i disse tabeller først !!!"),
@@ -167,19 +147,22 @@ namespace WebApiStudent_Net_Core2.ConstDeclarations
                 }
             } while (ReturnStringCounter < ReturnCodesAndReturnStringsArray.Length);
 
-            return ("Ingen string fundet der hører til søgt nummer !!!");
+            return (NoReturnStringFound);
         }
-    }
 
-    public class ReturnCodeAndReturnString
-    {
-        public int ReturnCode;
-        public string ReturnString;
-
-        public ReturnCodeAndReturnString(int ReturnCode, string ReturnString)
+        public static string GenerateReturnNumberString(int ReturnCode)
         {
-            this.ReturnCode = ReturnCode;
-            this.ReturnString = ReturnString;
+            string ReturnString = FindReturnString(ReturnCode);
+
+            if (NoReturnStringFound == ReturnString)
+            {
+                return (ReturnString);
+            }
+            else
+            {
+                return (ReturnCode + " " + ReturnString);
+            }
         }
     }
+
 }

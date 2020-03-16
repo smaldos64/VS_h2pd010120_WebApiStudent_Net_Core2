@@ -5,25 +5,39 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+using WebApiStudent_Net_Core2.Interfaces;
+using WebApiStudent_Net_Core2.Models;
+using WebApiStudent_Net_Core2.ConstDeclarations;
+using WebApiStudent_Net_Core2.Models.DataManager.Extensions;
+
 namespace WebApiStudent_Net_Core2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class UserInfoController : ControllerBase
     {
+        private IRepositoryWrapper _repoWrapper;
+
+        public UserInfoController(IRepositoryWrapper repoWrapper)
+        {
+            this._repoWrapper = repoWrapper;
+        }
+
         // GET: api/UserInfo
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            IEnumerable<UserInfo> UserInfoList = this._repoWrapper.UserInfoRepositoryWrapper.FindAllUserInfo();
+            
+            return Ok(UserInfoList);
         }
 
         // GET: api/UserInfo/5
         [HttpGet("{id}")]
         //[HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public IActionResult Get(string UserName, string Password)
         {
-            return "value";
+            return Ok(Const.DataBaseZeroValue);
         }
 
         // POST: api/UserInfo

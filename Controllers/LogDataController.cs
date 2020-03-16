@@ -13,7 +13,11 @@ using WebApiStudent_Net_Core2.ViewModels;
 
 namespace WebApiStudent_Net_Core2.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
+    // Med routing sat op som i controlleren her, kan vi f.eks. have mere end
+    // de 2 normale Get metoder. Det negative er, at vi så skal bruge ActionName på
+    // alle requests ind ind til controlleren her !!!
     [ApiController]
     public class LogDataController : ControllerBase
     {
@@ -24,8 +28,9 @@ namespace WebApiStudent_Net_Core2.Controllers
             _repoWrapper = repoWrapper;
         }
 
-        // GET: api/LogData
+        // GET: api/LogData/Get
         [HttpGet]
+        [ActionName("Get")]
         public IActionResult Get()
         {
             List<VM_LogData> VM_LogDataList = this._repoWrapper.LogDataRepositoryWrapper.GetAllLogData();
@@ -33,52 +38,62 @@ namespace WebApiStudent_Net_Core2.Controllers
             return Ok(VM_LogDataList);
         }
 
-        // GET: api/LogData/5
+        // GET: api/LogData/GetLogDataByUserID/5
+        [ActionName("GetLogDataByUserID")]
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult GetLogDataByUserID(int id)
         {
-            VM_LogData LogData_Object = this._repoWrapper.LogDataRepositoryWrapper.GetLogDataByLogID(id);
+            VM_LogData VM_LogData_Object = this._repoWrapper.LogDataRepositoryWrapper.GetLogDataByLogID(id);
 
-            if (LogData_Object.IsEmptyObjectGeneric())
+            //if (LogData_Object.IsEmptyObjectGeneric())
+            //{
+            //    return Ok(Const.GenerateReturnNumberString(Const.ObjectNotFound));
+            //}
+            if (VM_LogData_Object.LogData_Object.LogDataID == Const.DataBaseZeroValue)
             {
-                Ok(Const.ObjectNotFound + Const.FindReturnString(Const.ObjectNotFound));
+                return Ok(Const.GenerateReturnNumberString(Const.ObjectNotFound));
             }
 
-            return Ok(LogData_Object);
+            return Ok(VM_LogData_Object);
         }
 
-        //[HttpGet("{UserName}")]
-        //public IActionResult Get(string UsernName)
-        //{
-        //    List<VM_LogData> VM_LogDataList = this._repoWrapper.LogDataRepositoryWrapper.GetLogDataByUserName(UsernName);
+        // GET: api/LogData/GetLogDataByUserName/"UserName"
+        [ActionName("GetLogDataByUserName")]
+        [HttpGet("{UserName}")]
+        public IActionResult GetLogDataByUserName(string UserName)
+        {
+            List<VM_LogData> VM_LogDataList = this._repoWrapper.LogDataRepositoryWrapper.GetLogDataByUserName(UserName);
 
-        //    if (VM_LogDataList.IsEmptyObjectGeneric())
-        //    {
-        //        Ok(Const.ObjectNotFound + Const.FindReturnString(Const.ObjectNotFound));
-        //    }
+            if (VM_LogDataList.IsEmptyObjectGeneric())
+            {
+                return Ok(Const.GenerateReturnNumberString(Const.ObjectNotFound));
+            }
 
-        //    return Ok(VM_LogDataList);
-        //}
+            return Ok(VM_LogDataList);
+        }
 
-        // POST: api/LogData
+        // POST: api/LogData/Post
+        [ActionName("Post")]
         [HttpPost]
         public IActionResult Post([FromBody] string value)
         {
-            return Ok(Const.FeatureNotImplemented);
+            return Ok(Const.GenerateReturnNumberString(Const.FeatureNotImplemented));
         }
 
-        // PUT: api/LogData/5
+        // PUT: api/LogData/Put/5
+        [ActionName("Put")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Course Course_Object)
         {
-            return Ok(Const.FeatureNotImplemented);
+            return Ok(Const.GenerateReturnNumberString(Const.FeatureNotImplemented));
         }
 
-        // DELETE: api/LogData/5
+        // DELETE: api/LogData/Delete/5
+        [ActionName("Delete")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            return Ok(Const.FeatureNotImplemented);
+            return Ok(Const.GenerateReturnNumberString(Const.FeatureNotImplemented));
         }
     }
 }

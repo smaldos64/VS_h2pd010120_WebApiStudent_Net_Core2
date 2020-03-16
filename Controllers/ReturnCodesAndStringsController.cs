@@ -42,7 +42,7 @@ namespace WebApiStudent_Net_Core2.Controllers
             // fra RepositotyBase.cs, da metoden FindAll her arbejder på den fysiske databse. I tilfældet her
             // skal vi således blot konvertere vores svar fra vores konstante Array til en IQueryAble.
 
-            IEnumerable<ReturnCodesAndStrings> ReturnCodesAndStringsList = this._repoWrapper.ReturnCodesAndStringsWrapper.FindAll();
+            IEnumerable<ReturnCodesAndStrings> ReturnCodesAndStringsList = this._repoWrapper.ReturnCodesAndStringsWrapper.FindAllReturnCodesAndStrings();
 
             return Ok(ReturnCodesAndStringsList);
         }
@@ -51,28 +51,28 @@ namespace WebApiStudent_Net_Core2.Controllers
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(int id)
         {
-            return Ok(Const.FeatureNotImplemented);
+            return Ok(Const.GenerateReturnNumberString(Const.FeatureNotImplemented));
         }
 
         // POST: api/ReturnCodesAndStrings
         [HttpPost]
         public IActionResult Post([FromBody] string value)
         {
-            return Ok(Const.FeatureNotImplemented);
+            return Ok(Const.GenerateReturnNumberString(Const.FeatureNotImplemented));
         }
 
         // PUT: api/ReturnCodesAndStrings/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] Course Course_Object)
         {
-            return Ok(Const.FeatureNotImplemented);
+            return Ok(Const.GenerateReturnNumberString(Const.FeatureNotImplemented));
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            return Ok(Const.FeatureNotImplemented);
+            return Ok(Const.GenerateReturnNumberString(Const.FeatureNotImplemented));
         }
     }
 }

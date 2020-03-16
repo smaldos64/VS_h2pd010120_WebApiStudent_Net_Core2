@@ -11,7 +11,6 @@ using WebApiStudent_Net_Core2.Models.DataManager.Extensions;
 namespace WebApiStudent_Net_Core2.Models.DataManager
 {
     public class ReturnCodesAndStringsRepository : RepositoryBase<ReturnCodesAndStrings>, IReturnCodesAndStringsRepository
-    //public class ReturnCodesAndStringsRepository : IReturnCodesAndStringsRepository
     {
         public ReturnCodesAndStringsRepository(DatabaseContext repositoryContext)
             : base(repositoryContext)
@@ -19,7 +18,7 @@ namespace WebApiStudent_Net_Core2.Models.DataManager
 
         }
 
-        public IQueryable<ReturnCodesAndStrings> FindAll()
+        public IQueryable<ReturnCodesAndStrings> FindAllReturnCodesAndStrings()
         {
             return (Const.ReturnCodesAndReturnStringsArray.AsQueryable());
         }

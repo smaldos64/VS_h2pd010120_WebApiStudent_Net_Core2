@@ -19,7 +19,7 @@ namespace WebApiStudent_Net_Core2.Models
             this.RepositoryContext = repositoryContext;
         }
 
-        public IQueryable<T> FindAll()
+        public virtual IQueryable<T> FindAll()
         {
             return this.RepositoryContext.Set<T>().AsNoTracking();
         }
@@ -30,31 +30,31 @@ namespace WebApiStudent_Net_Core2.Models
         //    return this.RepositoryContext.Set<T>().Where(expression).AsNoTracking();
         //}
 
-        public List<T> FindByCondition(Expression<Func<T, bool>> expression)
+        public virtual List<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
             //ParameterExpression s = Expression.Parameter(typeof(T));
             return this.RepositoryContext.Set<T>().Where(expression).AsNoTracking().ToList();
         }
 
-        public void Create(T entity)
+        public virtual void Create(T entity)
         {
             this.RepositoryContext.Set<T>().Add(entity);
             this.Save();
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             this.RepositoryContext.Set<T>().Update(entity);
             this.Save();
         }
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
             this.RepositoryContext.Set<T>().Remove(entity);
             this.Save();
         }
 
-        public void Save()
+        public virtual void Save()
         {
             int NumberOfObjectsSaved = -1;
             NumberOfObjectsSaved = this.RepositoryContext.SaveChanges();
