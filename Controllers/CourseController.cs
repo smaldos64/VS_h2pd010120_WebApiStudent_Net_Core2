@@ -45,9 +45,9 @@ namespace WebApiStudent_Net_Core2.Controllers
         {
             Course Course_Object = this._repoWrapper.CourseRepositoryWrapper.GetCourseByCourseID(id);
            
-            if (null == Course_Object)
+            if (Course_Object.IsEmptyObjectGeneric())
             {
-                Ok(Const.GenerateReturnNumberString(Const.ObjectNotFound));
+                return Ok(Const.GenerateReturnNumberString(Const.ObjectNotFound));
             }
 
             return Ok(Course_Object);

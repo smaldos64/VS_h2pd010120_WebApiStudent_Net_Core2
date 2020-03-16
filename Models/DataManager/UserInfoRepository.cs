@@ -37,11 +37,12 @@ namespace WebApiStudent_Net_Core2.Models.DataManager
         public UserInfo GetUserByUserNameAndPassWord(string UserName, string Password)
         {
             UserInfo UserInfo_Object = new UserInfo();
-            int UserID = Const.UserNotFound;
 
-            if ((UserID = this.FindUserInDatabase(UserName, Password)) >= Const.DataBaseZeroValue)
+            Password = Crypto.Encrypt(Password);
+            try
             {
-                UserInfo_Object = FindByCondition(u => u.UserInfoID == UserID)
+                UserInfo_Object = FindByCondition(u => u.UserName == UserName &&
+                                                  u.UserPassword == Password)
                 .DefaultIfEmpty(new UserInfo())
                 .FirstOrDefault();
             }
@@ -101,6 +102,20 @@ namespace WebApiStudent_Net_Core2.Models.DataManager
             {
                 return (false);
             }
+        }
+
+        public bool SaveUser(string UserName, string Password)
+        {
+            UserInfo UserInfo_Object = new UserInfo();
+
+            Password = Crypto.Decrypt(Password);
+
+            UserInfo_Object.UserName = UserName;
+            UserInfo_Object.UserPassword = Password;
+
+            this.Create(UserInfo_Object);
+
+            return (true);
         }
     }
 }

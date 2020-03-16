@@ -33,29 +33,53 @@ namespace WebApiStudent_Net_Core2.Controllers
         }
 
         // GET: api/UserInfo/5
-        [HttpGet("{id}")]
-        //[HttpGet("{id}", Name = "Get")]
+        [HttpGet("{UserName}")]
         public IActionResult Get(string UserName, string Password)
         {
-            return Ok(Const.DataBaseZeroValue);
+            UserInfo UserInfo_Object = this._repoWrapper.UserInfoRepositoryWrapper.GetUserByUserNameAndPassWord(UserName, Password);
+
+            if (UserInfo_Object.IsEmptyObjectGeneric())
+            {
+                return Ok(Const.GenerateReturnNumberString(Const.UserNotFound));
+            }
+
+            return Ok(Const.GenerateReturnNumberString(Const.UserNameAlreadyPresent));
         }
 
         // POST: api/UserInfo
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post(string UserName, string Password)
         {
+#if (DEBUG_USER)
+            bool UserSavedOk;
+
+            UserSavedOk = this._repoWrapper.UserInfoRepositoryWrapper.SaveUser(UserName, Password);
+
+            if (true == UserSavedOk)
+            {
+                return Ok(Const.GenerateReturnNumberString(Const.SaveOperationOk));
+            }
+            else
+            {
+                return Ok(Const.GenerateReturnNumberString(Const.SaveOperationFailed));
+            }
+#else
+            return Ok(Const.GenerateReturnNumberString(Const.FeatureNotImplemented));
+#endif
         }
 
         // PUT: api/UserInfo/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] string value)
         {
+            return Ok(Const.GenerateReturnNumberString(Const.FeatureNotImplemented));
         }
 
         // DELETE: api/UserInfo/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            return Ok(Const.GenerateReturnNumberString(Const.FeatureNotImplemented));
         }
     }
 }
